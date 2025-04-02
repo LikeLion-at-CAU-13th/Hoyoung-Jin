@@ -67,34 +67,19 @@ const WLResult = document.getElementById("win-lose-result")
 
 //Win-lose-result 함수 작성
 function displayResult(clickedBtn, comChoice) {
-  if (clickedBtn !== comChoice) {
-    // clikedBtn이 바위 일때
-    if (clickedBtn === "rock" && comChoice === "paper") {
-      return WLResult.innerText ="Lose";
-    } 
-    else if (clickedBtn === "rock" && comChoice === "scissors") {
-      return  WLResult.innerText ="Win";
-    }
-
-    // clikedBtn이 가위 일때
-    else if (clickedBtn === "scissors" && comChoice === "paper") {
-      return  WLResult.innerText ="Win";
-    }
-    else if (clickedBtn === "scissors" && comChoice === "rock") {
-      return  WLResult.innerText ="Lose";
-    }
-    
-    // clickedBtn이 보 일때
-    else if (clickedBtn === "paper" && comChoice === "rock") {
-      return  WLResult.innerText ="Win";
-    } 
-    else if (clickedBtn === "paper" && comChoice === "scissors") {
-      return  WLResult.innerText ="Lose";
-    }
-  }
-  // 비겼을때 Draw 출력하기
-  else {
+  // 비겼을때
+  if (clickedBtn === comChoice) {
     return WLResult.innerText = "Draw"
+  // 사용자가 이겼을때
+  } else if (
+    (clickedBtn === "scissors" && comChoice === "paper") ||
+    (clickedBtn === "paper" && comChoice === "rock") ||
+    (clickedBtn === "rock" && comChoice === "scissors")
+  ) {
+    return WLResult.innerText = "Win"
+  //  사용자가 졌을때
+  } else {
+    return WLResult.innerText = "Lose"
   }
 }
 
