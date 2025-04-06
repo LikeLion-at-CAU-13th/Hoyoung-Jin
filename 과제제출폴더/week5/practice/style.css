@@ -114,15 +114,19 @@ justify-content: space-between;
 align-items: center;
 border-bottom: 1px solid #c7e4ff;
 }
+
 .text-box{
 width: 70%;
 padding-top: 10px;
 padding-bottom: 10px;
 }
+
 .complete-btn{
+
 color: white;
 background-color: #4d81b1;
 }
+
 .complete-btn:hover{
 cursor: pointer;
 background-color: #c4e2ff;
@@ -132,6 +136,7 @@ background-color: #c4e2ff;
 color: white;
 background-color: #5e5e5e;
 }
+
 .del-btn:hover{
 cursor: pointer;
 background-color: #e20000;
@@ -144,4 +149,17 @@ color: #808080;
 
 .done-btn{
 background-color: #5e5e5e;
+}
+
+/* 기존 버튼 스타일 덮어씌우기 */
+button img {
+    width: 20px;
+    height: 20px;
+}
+button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
