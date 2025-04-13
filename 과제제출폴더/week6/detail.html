@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자세한 사진 정보</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="detailContainer">
+    <!-- 여기에 데이터 불러오기 -->
+  </div>
+  <button onclick="window.location.href='index.html'"">돌아가기</button>
+  <script>
+    // 이전 URL에서 쿼리파라미터를 추출하고 가져옴
+    const params = new URLSearchParams(location.search);
+
+    //날짜 출력 바꾸기
+    function formatDate(time) {
+      const year = time.slice(2, 4); // 20xx에서 → xx 반환
+      const month = time.slice(4, 6); // 01 
+      const day = time.slice(6, 8); // 19
+      return `${year}-${month}-${day}`;
+    }
+
+    const detailContainer = document.getElementById("detailContainer")
+    detailContainer.innerHTML = `
+    <img src="${params.get("img")}" style="width:500px; max-width: 80%">
+    <p><strong>제목:</strong> ${params.get("title")}</p>
+    <p><strong>장소:</strong> ${params.get("location")}</p>
+    <p><strong>촬영일:</strong> ${formatDate(params.get("time"))}</p>
+    <p><strong>촬영자:</strong> ${params.get("photographer")}</p>
+    <p><strong>검색 키워드:</strong> ${params.get("keyword")}</p>
+    `;
+  </script>
+</body>
+</html>
