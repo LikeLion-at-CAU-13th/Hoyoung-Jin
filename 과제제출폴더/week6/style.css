@@ -5,7 +5,7 @@
     gap : 10px;
   }
 
-  #list {
+  .list {
     display: flex;
     flex-direction: column;
     justify-content: center;

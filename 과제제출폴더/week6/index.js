@@ -50,7 +50,7 @@ async function getData () {
 
     // list 노드 요소 생성
     const list = document.createElement('div');
-    list.id = 'list';
+    list.className = 'list';
         
     // img 요소 노드 생성
     const image = document.createElement('img')
