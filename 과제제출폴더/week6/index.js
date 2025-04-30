@@ -22,7 +22,7 @@ function getPlusI() {
 };
 
 
-let count = Math.floor(Math.random * 50) + 1;
+let count = Math.floor(Math.random() * 50) + 1;
 
 async function getData () {
 
