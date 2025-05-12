@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* body */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+
+/* 헤더 css 스타일 설정 */
+header {
+  background-color:#dbc0a3;
+  color: white;
+  padding: 20px;
+  height: 20vh;
+  border-radius: 40px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;   /* flex 세로로 정렬 */
+  justify-content: center;  /*중심축(여기선 세로)에서 중앙 */
+  align-items: center;     /*교차축(여기선 가로)에서 중앙*/
+}
+
+header h1 {
+  font-size: 40px;
+}
+header p {
+  font-size: 30px;
+}
+
+
+/* nav CSS 스타일 설정 */
+nav {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly; /*중심축(여기선 가로)에서 중앙 */
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+nav a {
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  background-color: #dbc0a3;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 20px;
+
+  transition: transform 0.3s ease, background-color ease 0.3s;
+}
+
+nav a:hover {
+  background-color: #917e6b;
+  outline: none;
+  transform: scale(1.1)
+
+}
+
+
+
+
+/* 본문 */
+
+
+/* 사진 크기 조정 */
+
+
+.photos {
+  width: 400px;
+  height: auto;
+  border-radius: 50px;
+  margin-right: 40px;
+}
+
+
+
+section {
+  margin-left: 100px;
+  margin-bottom: 100px;
+  display: flex;
+  align-items: center;
+}
+
+/* 본문 폰트 사이즈 조정*/
+#header h2 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+
+section h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+ 
+.about-script ol {
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+
+
+
+ol {
+  margin-left: 15px;
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+ol li {
+  margin-bottom: 10px;
+}
+
+
+
+
+/*footer*/
+
+footer {
+  margin-top: 30px;
+  border-top: 1px solid #a02f2f;
+  background-color: #ffe4e1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer h4 {
+  margin-left: 40px;
+}
+
+footer p {
+  margin-left: 60px;
+  padding: 10px 10px;
+}
+
+/* 버튼 CSS */
+button {
+  padding: 5px 10px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff6f91;
+  color: #f9f9f9;
+  transform: scale(1.1)
+}
