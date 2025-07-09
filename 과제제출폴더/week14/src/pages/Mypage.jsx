@@ -33,7 +33,7 @@ const Mypage = () => {
     getMyPage(access)
       .then((data) => {
         setData(data); // 데이터 받고
-        setLodaing(false); // set
+        setLoading(false); // set
         if (!refresh) {
           localStorage.removeItem("access");
           localStorage.removeItem("refresh");
