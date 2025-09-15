@@ -3,6 +3,19 @@ import styled from "styled-components";
 import Card from "./Card";
 import ContentInfo from "./ContentInfo";
 
+function Post({ post }) {
+  return (
+    <PostCard>
+      <Content>
+        <ContentInfo user={post.user} updatedTime={post.updatedAt} />
+        <Description>{post.content}</Description>
+      </Content>
+    </PostCard>
+  );
+}
+
+export default Post;
+
 const PostCard = styled(Card)`
   /* Post 컴포넌트에만 적용되는 추가 스타일이 있다면 여기에 작성 */
 `;
@@ -26,16 +39,3 @@ const Description = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 `;
-
-function Post({ post }) {
-  return (
-    <PostCard>
-      <Content>
-        <ContentInfo user={post.user} updatedTime={post.updatedAt} />
-        <Description>{post.content}</Description>
-      </Content>
-    </PostCard>
-  );
-}
-
-export default Post;

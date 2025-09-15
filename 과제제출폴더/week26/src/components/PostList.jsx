@@ -1,17 +1,16 @@
 // src/components/PostList.jsx
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
-import { getPosts, getPostsByUsername } from "../api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getPosts, getPostsByUsername, uploadPost } from "../api";
 import Post from "./Post";
 import { FEED_VARIANT } from "../values";
+import LoadingPage from "../pages/LoadingPage";
+import ErrorPage from "../pages/ErrorPage";
+import PostForm from "./PostForm";
 
-const ListContainer = styled.div`
-  display: grid;
-  gap: 20px;
-  margin-top: 20px;
-`;
+function PostList({ variant = FEED_VARIANT.HOME_FEED, showPostForm }) {
+  const queryClient = useQueryClient();
 
-function PostList({ variant = FEED_VARIANT.HOME_FEED }) {
   let postsQueryKey;
   let postsQueryFn;
 
@@ -26,15 +25,49 @@ function PostList({ variant = FEED_VARIANT.HOME_FEED }) {
     console.warn("Invalid feed request.");
   }
 
-  const { data: postsData } = useQuery({
+  const {
+    data: postsData,
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: postsQueryKey,
     queryFn: postsQueryFn,
   });
+
+  const uploadPostMutation = useMutation({
+    mutationFn: (newPost) => uploadPost(newPost),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postsQueryKey });
+    },
+    onError: () => {
+      toast.error("업로드에 실패했습니다.");
+    },
+  });
+
+  const handleUploadPost = (newPost) => {
+    uploadPostMutation.mutate(newPost, {
+      onSuccess: () => {
+        toast("포스트가 성공적으로 업로드 되었습니다!");
+      },
+    });
+  };
+
+  if (isPending) return <LoadingPage />;
+
+  if (isError) return <ErrorPage />;
 
   const posts = postsData?.results ?? [];
 
   return (
     <ListContainer>
+      {showPostForm ? (
+        <PostForm
+          onSubmit={handleUploadPost}
+          buttonDisabled={uploadPostMutation.isPending}
+        />
+      ) : (
+        ""
+      )}
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
@@ -43,3 +76,9 @@ function PostList({ variant = FEED_VARIANT.HOME_FEED }) {
 }
 
 export default PostList;
+
+const ListContainer = styled.div`
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+`;
