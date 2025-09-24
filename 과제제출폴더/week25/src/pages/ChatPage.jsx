@@ -4,29 +4,54 @@ import Header from "../components/Header";
 import ChatMessage from "../components/ChatMessage";
 import ChatInput from "../components/ChatInput";
 import Loader from "../components/Loader";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenerativeAI } from "@google/generative-ai";
 import { motion } from "framer-motion";
 
 // 작성해야 함.
 const ChatPage = () => {
+  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+  const url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=" +
+    API_KEY;
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+  // const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+  // const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
   const handleSend = async () => {
     if (!input.trim()) return;
     const userMsg = { role: "user", content: input };
     setMessages((prev) => [...prev, userMsg]);
+    // 비동기 오류 통제를 위해 변수에 따로 저장
+    const currentInput = input;
     setInput("");
     setLoading(true);
 
     try {
+      const requestBody = {
+        contents: [
+          {
+            parts: [{ text: currentInput }],
+          },
+        ],
+      };
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
       // 요기 바꿔주면 됨.
-      const result = await model.generateContent(input);
-      const text = result.response?.text() ?? "응답이 없습니다.";
+      const text =
+        data.candidates?.[0]?.content?.parts[0]?.text ?? "응답이 없습니다.";
       const aiMsg = { role: "assistant", content: text };
       setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
